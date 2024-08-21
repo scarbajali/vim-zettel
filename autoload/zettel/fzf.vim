@@ -51,16 +51,16 @@ function! zettel#fzf#execute_fzf(a, b, options)
     endif
     call extend(a:options, {"dir":zettel#vimwiki#path()})
   endif
-  if g:zettel_fzf_command == "ag"
+  "if g:zettel_fzf_command == "ag"
     " filetype pattern for ag: -G 'ext$'
     let search_ext = "-G '" . substitute(vimwiki#vars#get_wikilocal('ext'), '\.', '', '') . "$'"
     let query =  empty(a:a) ? '^(?=.)' : a:a
     let l:fzf_command = g:zettel_fzf_command . ' --color --smart-case --nogroup --column ' . shellescape(query)  " --ignore-case --smart-case
-  else
-    " use grep method for other commands
-    let search_ext = "*" . vimwiki#vars#get_wikilocal('ext')
-    let l:fzf_command = g:zettel_fzf_command . " " . shellescape(a:a)
-  endif
+  "else
+  "  " use grep method for other commands
+  "  let search_ext = "*" . vimwiki#vars#get_wikilocal('ext')
+  "  let l:fzf_command = g:zettel_fzf_command . " " . shellescape(a:a)
+  "endif
 
   " it seems that when we limit search only to current extension, FZF fails on
   " Windows. I couldn't find a better solution than to remove the seach
